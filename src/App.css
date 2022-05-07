@@ -1,3 +1,25 @@
 header {
     justify-content: space-between;
 }
+
+.wrapper {
+    min-height: 90vh;
+}
+  
+.form-wrapper {
+    width: min(90vw, 480px);
+}
+  
+.bg-white {
+    background-color: #fff;
+}
+
+.card-wrapper {
+    width: min(90vw, 500px);
+}
+
+.post-card:hover  .delete-post-icon {
+    visibility: visible;
+}
+
+  
