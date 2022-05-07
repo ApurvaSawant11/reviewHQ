@@ -4,7 +4,6 @@ import { addNewPost } from "services/firebase-services";
 import TextareaAutosize from "react-textarea-autosize";
 
 const NewPost = () => {
-  console.log("NewPOst getting rendered");
   const { currentUserDetails } = useAuth();
   const [newPost, setNewPost] = useState("");
 
