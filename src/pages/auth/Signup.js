@@ -28,6 +28,7 @@ const Signup = () => {
           lastName: lastName,
           userName: userName,
           uid: user.uid,
+          starsCount: 0,
         };
         createUserDocument(userData);
         navigate("/");

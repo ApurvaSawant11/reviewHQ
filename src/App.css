@@ -14,8 +14,16 @@ header {
     background-color: #fff;
 }
 
+.bg-indigo-100 {
+    background-color: rgb(238 242 255)
+}
+
 .card-wrapper {
     width: min(90vw, 500px);
+}
+
+.leaderboard-wrapper {
+    width: min(90vw, 40rem);
 }
 
 .post-card:hover  .delete-post-icon {
@@ -33,5 +41,9 @@ header {
 
 .video {
     max-height: 30rem;
+}
+
+.leading-64{
+    line-height: 64px;
 }
   

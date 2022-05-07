@@ -15,7 +15,7 @@ const Header = () => {
     }
   };
   return (
-    <header className="flex px-5 py-3 border-b-2 border-indigo-700 bg-white sticky top-0">
+    <header className="flex px-5 py-3 border-b-2 border-indigo-700 bg-white sticky top-0 z-10">
       <section>
         <h1 className="font-bold text-3xl">
           review<span className="text-primary">HQ</span>

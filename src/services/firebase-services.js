@@ -6,6 +6,9 @@ import {
   addDoc,
   updateDoc,
   deleteDoc,
+  arrayUnion,
+  arrayRemove,
+  increment,
 } from "firebase/firestore";
 import {
   ref,
@@ -96,6 +99,28 @@ const deleteAsset = (setCurrentAsset, assetDetails, setAssetDetails) => {
     });
 };
 
+// update comment's star (points)
+const updateCommentStars = async (
+  { postId, commentId, userId },
+  currentUserName,
+  actionType
+) => {
+  await updateDoc(doc(db, "posts", `${postId}`, "comments", `${commentId}`), {
+    starsEarnedFrom:
+      actionType === "add"
+        ? arrayUnion(currentUserName)
+        : arrayRemove(currentUserName),
+  });
+  updateUserStars(userId, actionType);
+};
+
+// update user's star (points)
+const updateUserStars = async (userId, actionType) => {
+  await updateDoc(doc(db, "users", `${userId}`), {
+    starsCount: actionType === "add" ? increment(1) : increment(-1),
+  });
+};
+
 export {
   createUserDocument,
   addNewPost,
@@ -104,4 +129,6 @@ export {
   deletePost,
   uploadAsset,
   deleteAsset,
+  updateCommentStars,
+  updateUserStars,
 };

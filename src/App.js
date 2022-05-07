@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import { Home, Login, Signup, SinglePost } from "pages";
+import { Home, Leaderboard, Login, Signup, SinglePost } from "pages";
 import { Header } from "components";
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<Home />} />
         <Route path="/post/:postId" element={<SinglePost />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
       </Routes>
     </div>
   );
