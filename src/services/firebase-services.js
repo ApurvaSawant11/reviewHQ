@@ -1,5 +1,19 @@
-import { db } from "../config/firebase-config";
-import { doc, collection, setDoc, addDoc, updateDoc } from "firebase/firestore";
+import { db, storage } from "../config/firebase-config";
+import {
+  doc,
+  collection,
+  setDoc,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
+import {
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
+import { v4 as uuid } from "uuid";
 
 const createUserDocument = async (userData) => {
   await setDoc(doc(db, "users", `${userData.uid}`), userData);
@@ -15,10 +29,79 @@ const addCommentToPost = async (postId, newComment) => {
   await addDoc(collection(db, "posts", `${postId}`, "comments"), newComment);
 };
 
+// update comment count of a post
 const updateCommentCount = async (postId, currentCommentsCount) => {
   await updateDoc(doc(db, "posts", `${postId}`), {
     commentsCount: currentCommentsCount + 1,
   });
 };
 
-export { createUserDocument, addNewPost, addCommentToPost, updateCommentCount };
+// delete user's post
+const deletePost = async (postId, assetDetails) => {
+  if (assetDetails) {
+    const assetRef = ref(storage, `${assetDetails.assetStoragePath}`);
+    deleteObject(assetRef);
+  }
+  await deleteDoc(doc(db, "posts", `${postId}`));
+};
+
+// Add asset to the post
+const uploadAsset = (currentAsset, setCurrentAsset, setAssetDetails) => {
+  if (currentAsset === null) return;
+  const assetName = uuid();
+  const currentAssetType = currentAsset.type.includes("image")
+    ? "image"
+    : "video";
+
+  const uploadTask = uploadBytesResumable(
+    ref(storage, `${currentAssetType}s/${assetName}`),
+    currentAsset
+  );
+
+  uploadTask.on(
+    "state_changed",
+    (snapshot) => {
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log("Upload is " + progress + "% done");
+    },
+    (error) => {
+      // Handle unsuccessful uploads
+    },
+    () => {
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        setAssetDetails({
+          assetType: currentAssetType,
+          assetUrl: downloadURL,
+          assetStoragePath: `${currentAssetType}s/${assetName}`,
+        });
+        setCurrentAsset(null);
+      });
+    }
+  );
+};
+
+// delete asset from the post
+
+const deleteAsset = (setCurrentAsset, assetDetails, setAssetDetails) => {
+  const assetRef = ref(storage, `${assetDetails.assetStoragePath}`);
+
+  deleteObject(assetRef)
+    .then(() => {
+      console.log("file deleted successfully");
+      setAssetDetails(null);
+      setCurrentAsset(null);
+    })
+    .catch((error) => {
+      // Uh-oh, an error occurred!
+    });
+};
+
+export {
+  createUserDocument,
+  addNewPost,
+  addCommentToPost,
+  updateCommentCount,
+  deletePost,
+  uploadAsset,
+  deleteAsset,
+};

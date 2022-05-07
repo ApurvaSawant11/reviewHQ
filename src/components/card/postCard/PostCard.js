@@ -10,6 +10,7 @@ import {
   LikeOutlineIcon,
 } from "assets";
 import { useNavigate } from "react-router-dom";
+import { deletePost } from "services/firebase-services";
 
 const PostCard = () => {
   const { posts } = useData();
@@ -20,7 +21,15 @@ const PostCard = () => {
     <article className="text-left flex flex-col items-center">
       {posts.map(
         (
-          { _id, content, createdAt, likesCount, commentsCount, userName },
+          {
+            _id,
+            content,
+            createdAt,
+            likesCount,
+            commentsCount,
+            userName,
+            asset,
+          },
           index
         ) => (
           <div
@@ -34,6 +43,10 @@ const PostCard = () => {
                 <DeleteIcon
                   className="delete-post-icon cursor-pointer text-red-600 invisible"
                   size={20}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deletePost(_id, asset);
+                  }}
                 />
               )}
             </header>
@@ -43,18 +56,39 @@ const PostCard = () => {
             <div className="whitespace-pre-wrap mt-4">
               <Linkify
                 componentDecorator={(decoratedHref, decoratedText, key) => (
-                  <SecureLink
-                    className="text-indigo-700 "
-                    href={decoratedHref}
-                    key={key}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {decoratedText}
-                  </SecureLink>
+                  <div key={key}>
+                    <SecureLink
+                      className="text-indigo-700 "
+                      href={decoratedHref}
+                      key={key}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {decoratedText}
+                    </SecureLink>
+                  </div>
                 )}
               >
                 {content}
               </Linkify>
+              {asset && (
+                <div onClick={(e) => e.stopPropagation()}>
+                  {asset.assetType === "video" ? (
+                    <video
+                      className="video m-auto rounded-md"
+                      src={asset.assetUrl}
+                      controls
+                    />
+                  ) : (
+                    <a
+                      href={asset.assetUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img className="rounded" src={asset.assetUrl} />
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="flex items-center justify-between mt-4 pt-2 border-t-2 border-gray-200">
