@@ -92,6 +92,25 @@ const SinglePost = () => {
               >
                 {post.content}
               </Linkify>
+              {post.asset && (
+                <div>
+                  {post.asset.assetType === "video" ? (
+                    <video
+                      className="video m-auto rounded-md"
+                      src={post.asset.assetUrl}
+                      controls
+                    />
+                  ) : (
+                    <a
+                      href={post.asset.assetUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img className="rounded-md" src={post.asset.assetUrl} />
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="flex items-center justify-between mt-4 mb-3 pt-2 border-t-2 ">
