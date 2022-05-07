@@ -44,6 +44,8 @@ const AuthProvider = ({ children }) => {
       if (currentuser) {
         setUser(currentuser);
         getCurrentUserDetails(currentuser.uid);
+      } else {
+        setUser(currentuser);
       }
     });
 

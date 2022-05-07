@@ -28,9 +28,10 @@ const Signup = () => {
           lastName: lastName,
           userName: userName,
           uid: user.uid,
+          starsCount: 0,
         };
         createUserDocument(userData);
-        navigate("/");
+        navigate("/", { replace: true });
       } catch (error) {
         console.error(error);
       }
