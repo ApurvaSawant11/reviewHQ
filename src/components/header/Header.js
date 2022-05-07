@@ -3,9 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "context/auth-context";
 
 const Header = () => {
-  const { logOut, currentUserDetails } = useAuth();
+  const { user, logOut } = useAuth();
   const navigate = useNavigate();
 
+  console.log(user);
   const logoutHandler = async () => {
     try {
       await logOut();
@@ -22,12 +23,21 @@ const Header = () => {
         </h1>
       </section>
       <section>
-        <button
-          className="py-2 px-2.5 bg-primary text-white rounded hover:bg-primaryDark"
-          onClick={logoutHandler}
-        >
-          Logout
-        </button>
+        {user ? (
+          <button
+            className="py-2 px-4 bg-primary text-white rounded hover:bg-primaryDark"
+            onClick={logoutHandler}
+          >
+            Logout
+          </button>
+        ) : (
+          <Link
+            to="/login"
+            className="py-2 px-4 block bg-primary text-white rounded hover:bg-primaryDark"
+          >
+            Login
+          </Link>
+        )}
       </section>
     </header>
   );

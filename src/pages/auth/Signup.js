@@ -31,7 +31,7 @@ const Signup = () => {
           starsCount: 0,
         };
         createUserDocument(userData);
-        navigate("/");
+        navigate("/", { replace: true });
       } catch (error) {
         console.error(error);
       }
