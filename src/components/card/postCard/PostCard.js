@@ -3,22 +3,30 @@ import { useAuth, useData } from "context";
 import { convertTimestampToDate } from "utils/convertDate";
 import Linkify from "react-linkify";
 import { SecureLink } from "react-secure-link";
-import { CommentIcon, DeleteIcon, ExpandIcon, LikeOutlineIcon } from "assets";
+import {
+  BookmarkOutlineIcon,
+  CommentIcon,
+  DeleteIcon,
+  LikeOutlineIcon,
+} from "assets";
+import { useNavigate } from "react-router-dom";
 
 const PostCard = () => {
   const { posts } = useData();
+  const navigate = useNavigate();
   const { currentUserDetails } = useAuth();
 
   return (
     <article className="text-left flex flex-col items-center">
       {posts.map(
         (
-          { content, createdAt, likesCount, commentsCount, userName },
+          { _id, content, createdAt, likesCount, commentsCount, userName },
           index
         ) => (
           <div
-            className="card-wrapper post-card rounded-md my-5 border-2 border-gray-300 p-4 pb-3"
+            className="card-wrapper post-card rounded-md my-5 border-2 border-gray-300 p-4 pb-3 cursor-pointer"
             key={index}
+            onClick={() => navigate(`/post/${_id}`)}
           >
             <header className="flex justify-between">
               <h4 className="font-bold ">@{userName}</h4>
@@ -39,6 +47,7 @@ const PostCard = () => {
                     className="text-indigo-700 "
                     href={decoratedHref}
                     key={key}
+                    onClick={(e) => e.stopPropagation()}
                   >
                     {decoratedText}
                   </SecureLink>
@@ -53,11 +62,14 @@ const PostCard = () => {
                 <LikeOutlineIcon className="cursor-pointer" size={20} />
                 <span className="text-md ml-4">{likesCount}</span>
               </div>
-              <div className="flex items-center">
+              <div
+                className="flex items-center"
+                onClick={() => navigate(`/post/${_id}`)}
+              >
                 <CommentIcon className="cursor-pointer" size={18} />{" "}
                 <span className="text-md ml-4">{commentsCount}</span>
               </div>
-              <ExpandIcon className="cursor-pointer" size={24} />
+              <BookmarkOutlineIcon size={17} />
             </div>
           </div>
         )
