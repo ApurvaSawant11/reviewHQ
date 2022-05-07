@@ -31,9 +31,9 @@ const Login = () => {
     <main className="h-screen wrapper flex justify-center items-start mt-[4rem] ">
       <form
         onSubmit={loginHandler}
-        className="rounded-lg shadow-lg shadow-indigo-500/50 w-3/12"
+        className="rounded-lg shadow-lg shadow-indigo-500/50 form-wrapper"
       >
-        <div className="bg-white form-wrapper p-5">
+        <div className="bg-white p-5">
           <h4 className="font-bold uppercase text-center text-2xl">
             <span className="border-b-2 border-indigo-700">Login</span>
           </h4>
