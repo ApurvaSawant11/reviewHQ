@@ -15,10 +15,8 @@ import {
   deletePost,
 } from "services/firebase-services";
 import { useParams } from "react-router-dom";
-import Linkify from "react-linkify";
-import { SecureLink } from "react-secure-link";
 import { useAuth, useData } from "context";
-import { Comments } from "components";
+import { Comments, LinkifyContent } from "components";
 
 const SinglePost = () => {
   const { postId } = useParams();
@@ -48,19 +46,7 @@ const SinglePost = () => {
               {convertTimestampToDate(post.createdAt)}
             </p>
             <div className="whitespace-pre-wrap mt-4">
-              <Linkify
-                componentDecorator={(decoratedHref, decoratedText, key) => (
-                  <SecureLink
-                    className="text-indigo-700 "
-                    href={decoratedHref}
-                    key={key}
-                  >
-                    {decoratedText}
-                  </SecureLink>
-                )}
-              >
-                {post.content}
-              </Linkify>
+              <LinkifyContent content={post.content} />
               {post.asset && (
                 <div>
                   {post.asset.assetType === "video" ? (

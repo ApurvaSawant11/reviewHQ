@@ -10,6 +10,7 @@ import { db } from "config/firebase-config";
 import TextareaAutosize from "react-textarea-autosize";
 import { ReplyModal } from "components/modal/ReplyModal";
 import { convertTimestampToDate } from "utils/convertDate";
+import { LinkifyContent } from "components/LinkifyContent";
 
 const Comments = ({ post, currentUserDetails }) => {
   const [newComment, setNewComment] = useState("");
@@ -126,7 +127,7 @@ const Comments = ({ post, currentUserDetails }) => {
                 )}
               </div>
             </div>
-            <p>{body}</p>
+            <LinkifyContent content={body} />
             <div className="flex py-3">
               <ReplyIcon
                 size={20}
@@ -149,7 +150,7 @@ const Comments = ({ post, currentUserDetails }) => {
                     {convertTimestampToDate(reply.createdAt)}
                   </span>
                 </div>
-                {reply.body}
+                <LinkifyContent content={reply.body} />
               </div>
             ))}
           </div>
