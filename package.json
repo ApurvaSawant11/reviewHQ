@@ -16,6 +16,7 @@
     "react-scripts": "5.0.1",
     "react-secure-link": "^3.0.3",
     "react-textarea-autosize": "^8.3.3",
+    "react-toastify": "^9.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

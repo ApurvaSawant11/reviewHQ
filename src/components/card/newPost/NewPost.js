@@ -7,6 +7,7 @@ import {
 } from "services/firebase-services";
 import TextareaAutosize from "react-textarea-autosize";
 import { CloseIcon, UploadIcon } from "assets";
+import { toast } from "react-toastify";
 const NewPost = () => {
   const { currentUserDetails } = useAuth();
   const [newPost, setNewPost] = useState("");
@@ -18,18 +19,24 @@ const NewPost = () => {
   }, [currentAsset]);
 
   const addPostHandler = () => {
-    const postDetails = {
-      content: newPost,
-      createdAt: new Date(),
-      userName: currentUserDetails.userName,
-      likedByUsers: [],
-      bookmarkedByUsers: [],
-      commentsCount: 0,
-      asset: assetDetails,
-    };
-    addNewPost(postDetails);
-    setNewPost("");
-    setAssetDetails(null);
+    const tagsArray = newPost.split(" ").filter((v) => v.startsWith("#"));
+    if (newPost.trim() !== "") {
+      const postDetails = {
+        content: newPost,
+        createdAt: new Date(),
+        userName: currentUserDetails.userName,
+        likedByUsers: [],
+        bookmarkedByUsers: [],
+        commentsCount: 0,
+        asset: assetDetails,
+        tags: tagsArray,
+      };
+      addNewPost(postDetails);
+      setNewPost("");
+      setAssetDetails(null);
+    } else {
+      toast.error("Post cannot be empty");
+    }
   };
 
   return (

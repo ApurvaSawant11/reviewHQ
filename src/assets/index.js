@@ -10,7 +10,10 @@ export {
   AiFillHome as HomeFillIcon,
   AiOutlineHome as HomeOutlineIcon,
 } from "react-icons/ai";
-export { FaRegComment as CommentIcon } from "react-icons/fa";
+export {
+  FaRegComment as CommentIcon,
+  FaRegUserCircle as ProfileCircleIcon,
+} from "react-icons/fa";
 export {
   MdOutlineDeleteOutline as DeleteIcon,
   MdLeaderboard as LeaderboardIcon,
@@ -21,3 +24,4 @@ export {
 } from "react-icons/fa";
 export { BsImage as UploadIcon, BsReply as ReplyIcon } from "react-icons/bs";
 export { BiUser as ProfileIcon } from "react-icons/bi";
+export { ImSearch as SearchIcon } from "react-icons/im";

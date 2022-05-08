@@ -19,6 +19,7 @@ import {
   deleteObject,
 } from "firebase/storage";
 import { v4 as uuid } from "uuid";
+import { toast } from "react-toastify";
 
 const createUserDocument = async (userData) => {
   await setDoc(doc(db, "users", `${userData.uid}`), userData);
@@ -70,6 +71,7 @@ const uploadAsset = (currentAsset, setCurrentAsset, setAssetDetails) => {
     currentAsset
   );
 
+  toast.info("Upload in progress. Please wait", { autoClose: false });
   uploadTask.on(
     "state_changed",
     (snapshot) => {
@@ -87,6 +89,7 @@ const uploadAsset = (currentAsset, setCurrentAsset, setAssetDetails) => {
           assetStoragePath: `${currentAssetType}s/${assetName}`,
         });
         setCurrentAsset(null);
+        toast.dismiss();
       });
     }
   );

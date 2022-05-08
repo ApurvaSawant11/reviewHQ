@@ -27,8 +27,8 @@ const Header = () => {
           className="flex items-center border-2 mr-4 px-4 rounded-md cursor-pointer"
           onClick={() => navigate("/leaderboard")}
         >
-          <LeaderboardIcon size={24} className="text-indigo-700 mr-2" />
-          <span className="font-bold">Leaderboard</span>
+          <LeaderboardIcon size={24} className="text-indigo-700" />
+          <span className="font-bold ml-2 leaderboard">Leaderboard</span>
         </div>
         {user ? (
           <button

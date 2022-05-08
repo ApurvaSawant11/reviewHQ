@@ -1,11 +1,16 @@
-import { BookmarkOutlineIcon, HomeFillIcon, ProfileIcon } from "assets";
+import {
+  BookmarkOutlineIcon,
+  HomeFillIcon,
+  ProfileIcon,
+  SearchIcon,
+} from "assets";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <aside className="bg-indigo-100 sticky top-[4.1rem] z-10">
-      <ul className="flex justify-around">
+      <ul className="flex flex-wrap justify-around">
         <Link to="/">
           <li className="p-4 flex items-center">
             <HomeFillIcon className="mr-2" size={18} />
@@ -15,6 +20,11 @@ const Navbar = () => {
         <Link to="/bookmarks">
           <li className="p-4 flex items-center">
             <BookmarkOutlineIcon className="mr-2" /> Bookmarks
+          </li>
+        </Link>
+        <Link to="/search">
+          <li className="p-4 flex items-center">
+            <SearchIcon className="mr-2" /> Search
           </li>
         </Link>
         <Link to="/profile">

@@ -1,11 +1,21 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "context";
 import { createUserDocument } from "services/firebase-services";
+import { toast } from "react-toastify";
 
 const Signup = () => {
-  const { signUp } = useAuth();
+  const { signUp, user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (user) {
+      setTimeout(() => {
+        navigate(location?.state?.from || "/", { replace: true });
+      }, 1000);
+    }
+  }, [user]);
 
   const defaultFormValue = {
     email: "",
@@ -32,9 +42,8 @@ const Signup = () => {
           bookmarkRefs: [],
         };
         createUserDocument(userData);
-        navigate("/", { replace: true });
       } catch (error) {
-        console.error(error);
+        toast.error("Something went wrong");
       }
     }
   };
