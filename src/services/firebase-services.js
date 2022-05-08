@@ -169,6 +169,15 @@ const updateArrayOfPost = async (
   });
 };
 
+// add user to my chats
+const addUserToMyChats = async (currentUserId, userIdToAdd) => {
+  await updateDoc(doc(db, "users", `${currentUserId}`), {
+    myChatPartners: arrayUnion(userIdToAdd),
+  });
+  await updateDoc(doc(db, "users", `${userIdToAdd}`), {
+    myChatPartners: arrayUnion(currentUserId),
+  });
+};
 export {
   createUserDocument,
   addNewPost,
@@ -183,4 +192,5 @@ export {
   addPostToBookmarks,
   removePostToBookmarks,
   updateArrayOfPost,
+  addUserToMyChats,
 };

@@ -6,3 +6,4 @@ export { Leaderboard } from "./leaderboard/Leaderboard";
 export { Bookmarks } from "./bookmarks/Bookmarks";
 export { Search } from "./search/Search";
 export { Profile } from "./profile/Profile";
+export { Chats } from "./chats/Chats";
