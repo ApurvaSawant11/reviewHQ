@@ -19,5 +19,5 @@ export {
   FaRegBookmark as BookmarkOutlineIcon,
   FaBookmark as BookmarkFillIcon,
 } from "react-icons/fa";
-export { BsImage as UploadIcon } from "react-icons/bs";
+export { BsImage as UploadIcon, BsReply as ReplyIcon } from "react-icons/bs";
 export { BiUser as ProfileIcon } from "react-icons/bi";
