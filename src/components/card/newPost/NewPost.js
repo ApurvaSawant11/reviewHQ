@@ -22,7 +22,8 @@ const NewPost = () => {
       content: newPost,
       createdAt: new Date(),
       userName: currentUserDetails.userName,
-      likesCount: 0,
+      likedByUsers: [],
+      bookmarkedByUsers: [],
       commentsCount: 0,
       asset: assetDetails,
     };

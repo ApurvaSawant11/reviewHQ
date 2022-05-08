@@ -1,12 +1,12 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "context/auth-context";
+import { LeaderboardIcon } from "assets";
 
 const Header = () => {
   const { user, logOut } = useAuth();
   const navigate = useNavigate();
 
-  console.log(user);
   const logoutHandler = async () => {
     try {
       await logOut();
@@ -22,7 +22,14 @@ const Header = () => {
           review<span className="text-primary">HQ</span>
         </h1>
       </section>
-      <section>
+      <section className="flex">
+        <div
+          className="flex items-center border-2 mr-4 px-4 rounded-md cursor-pointer"
+          onClick={() => navigate("/leaderboard")}
+        >
+          <LeaderboardIcon size={24} className="text-indigo-700 mr-2" />
+          <span className="font-bold">Leaderboard</span>
+        </div>
         {user ? (
           <button
             className="py-2 px-4 bg-primary text-white rounded hover:bg-primaryDark"

@@ -3,12 +3,14 @@ import {
   doc,
   collection,
   setDoc,
+  getDoc,
   addDoc,
   updateDoc,
   deleteDoc,
   arrayUnion,
   arrayRemove,
   increment,
+  deleteField,
 } from "firebase/firestore";
 import {
   ref,
@@ -121,6 +123,41 @@ const updateUserStars = async (userId, actionType) => {
   });
 };
 
+// add post to user's bookmarks
+const addPostToBookmarks = async ({ uid, userName }, postId) => {
+  updateArrayOfPost(postId, userName, "bookmarkedByUsers", "add");
+  const docRef = doc(db, "posts", `${postId}`);
+  await setDoc(
+    doc(db, "users", `${uid}`),
+    {
+      bookmarkRefs: { [postId]: docRef },
+    },
+    { merge: true }
+  );
+};
+
+// remove post to user's bookmarks
+const removePostToBookmarks = async ({ uid, userName }, postId) => {
+  updateArrayOfPost(postId, userName, "bookmarkedByUsers", "remove");
+  await updateDoc(doc(db, "users", `${uid}`), {
+    [`bookmarkRefs.${postId}`]: deleteField(),
+  });
+};
+
+// update array content of the post
+const updateArrayOfPost = async (
+  postId,
+  currentUserName,
+  arrayName,
+  actionType
+) => {
+  await updateDoc(doc(db, "posts", `${postId}`), {
+    [arrayName]:
+      actionType === "add"
+        ? arrayUnion(currentUserName)
+        : arrayRemove(currentUserName),
+  });
+};
 export {
   createUserDocument,
   addNewPost,
@@ -131,4 +168,7 @@ export {
   deleteAsset,
   updateCommentStars,
   updateUserStars,
+  addPostToBookmarks,
+  removePostToBookmarks,
+  updateArrayOfPost,
 };

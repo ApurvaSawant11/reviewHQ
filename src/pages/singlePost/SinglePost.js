@@ -6,12 +6,18 @@ import {
   DeleteIcon,
   filledStarImg,
   LikeOutlineIcon,
+  BookmarkFillIcon,
+  LikeFillIcon,
 } from "assets";
 import { outlinedStarImg } from "assets";
 import {
   addCommentToPost,
   updateCommentCount,
   updateCommentStars,
+  addPostToBookmarks,
+  removePostToBookmarks,
+  updateArrayOfPost,
+  deletePost,
 } from "services/firebase-services";
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { useParams } from "react-router-dom";
@@ -75,6 +81,9 @@ const SinglePost = () => {
                 <DeleteIcon
                   className="delete-post-icon cursor-pointer text-red-600 invisible"
                   size={20}
+                  onClick={(e) => {
+                    deletePost(post._id, post.asset);
+                  }}
                 />
               )}
             </header>
@@ -116,16 +125,56 @@ const SinglePost = () => {
               )}
             </div>
 
-            <div className="flex items-center justify-between mt-4 mb-3 pt-2 border-t-2 ">
+            <div className="flex items-center justify-between mt-4 mb-2 pt-2 border-t-2 border-gray-200">
               <div className="flex items-center">
-                <LikeOutlineIcon className="cursor-pointer" size={20} />
-                <span className="text-md ml-4">{post.likesCount}</span>
+                {post.likedByUsers.includes(currentUserDetails.userName) ? (
+                  <LikeFillIcon
+                    className="cursor-pointer"
+                    size={20}
+                    onClick={() =>
+                      updateArrayOfPost(
+                        postId,
+                        currentUserDetails.userName,
+                        "likedByUsers",
+                        "remove"
+                      )
+                    }
+                  />
+                ) : (
+                  <LikeOutlineIcon
+                    className="cursor-pointer"
+                    size={20}
+                    onClick={() =>
+                      updateArrayOfPost(
+                        postId,
+                        currentUserDetails.userName,
+                        "likedByUsers",
+                        "add"
+                      )
+                    }
+                  />
+                )}
+                <span className="text-md ml-4">{post.likedByUsers.length}</span>
               </div>
               <div className="flex items-center">
                 <CommentIcon className="cursor-pointer" size={18} />{" "}
                 <span className="text-md ml-4">{post.commentsCount}</span>
               </div>
-              <BookmarkOutlineIcon className="cursor-pointer" size={17} />
+              {post.bookmarkedByUsers.includes(currentUserDetails.userName) ? (
+                <BookmarkFillIcon
+                  size={17}
+                  onClick={() =>
+                    removePostToBookmarks(currentUserDetails, post._id)
+                  }
+                />
+              ) : (
+                <BookmarkOutlineIcon
+                  size={17}
+                  onClick={() =>
+                    addPostToBookmarks(currentUserDetails, post._id)
+                  }
+                />
+              )}
             </div>
             {/* comment */}
             <div className="border-t-2 pt-2 mb-4">
@@ -148,54 +197,53 @@ const SinglePost = () => {
               )}
             </div>
 
-            {postComments?.map((comment, index) => (
-              <div className="post-card py-4 border-t-2 " key={index}>
-                <div className="flex justify-between">
-                  <p className="text-xs font-bold">@{comment.userName}</p>
-                  <div className="flex items-center text-gray-500">
-                    <span className="mr-2">
-                      {comment.starsEarnedFrom.length}
-                    </span>
-                    {comment.starsEarnedFrom.includes(
-                      currentUserDetails.userName
-                    ) ? (
-                      <img
-                        className={`h-6 ${
-                          currentUserDetails.userName !== comment.userName
-                            ? "cursor-pointer"
-                            : "pointer-events-none opacity-50"
-                        }`}
-                        src={filledStarImg}
-                        onClick={() =>
-                          updateCommentStars(
-                            comment,
-                            currentUserDetails.userName,
-                            "remove"
-                          )
-                        }
-                      />
-                    ) : (
-                      <img
-                        className={`h-6 ${
-                          currentUserDetails.userName !== comment.userName
-                            ? "cursor-pointer"
-                            : "pointer-events-none opacity-50"
-                        }`}
-                        src={outlinedStarImg}
-                        onClick={() =>
-                          updateCommentStars(
-                            comment,
-                            currentUserDetails.userName,
-                            "add"
-                          )
-                        }
-                      />
-                    )}
+            {postComments?.map((comment, index) => {
+              const { userName, starsEarnedFrom, body } = comment;
+              return (
+                <div className="post-card py-4 border-t-2 " key={index}>
+                  <div className="flex justify-between">
+                    <p className="text-xs font-bold">@{userName}</p>
+                    <div className="flex items-center text-gray-500">
+                      <span className="mr-2">{starsEarnedFrom.length}</span>
+                      {starsEarnedFrom.includes(currentUserDetails.userName) ? (
+                        <img
+                          className={`h-6 ${
+                            currentUserDetails.userName !== userName
+                              ? "cursor-pointer"
+                              : "pointer-events-none opacity-50"
+                          }`}
+                          src={filledStarImg}
+                          onClick={() =>
+                            updateCommentStars(
+                              comment,
+                              currentUserDetails.userName,
+                              "remove"
+                            )
+                          }
+                        />
+                      ) : (
+                        <img
+                          className={`h-6 ${
+                            currentUserDetails.userName !== userName
+                              ? "cursor-pointer"
+                              : "pointer-events-none opacity-50"
+                          }`}
+                          src={outlinedStarImg}
+                          onClick={() =>
+                            updateCommentStars(
+                              comment,
+                              currentUserDetails.userName,
+                              "add"
+                            )
+                          }
+                        />
+                      )}
+                    </div>
                   </div>
+                  <p>{body}</p>
                 </div>
-                <p>{comment.body}</p>
-              </div>
-            ))}
+              );
+            })}
           </section>
         </>
       )}
