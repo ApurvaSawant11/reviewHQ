@@ -46,7 +46,10 @@ const SinglePost = () => {
               {convertTimestampToDate(post.createdAt)}
             </p>
             <div className="whitespace-pre-wrap mt-4">
-              <LinkifyContent content={post.content} />
+              <LinkifyContent
+                content={post.content}
+                linkClass={"text-indigo-700"}
+              />
               {post.asset && (
                 <div>
                   {post.asset.assetType === "video" ? (

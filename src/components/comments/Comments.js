@@ -58,7 +58,6 @@ const Comments = ({ post, currentUserDetails }) => {
       setNewComment("");
       setShowButton(false);
     } else {
-      console.log("gere");
       toast.error("Comment cannot be empty");
     }
   };
@@ -133,7 +132,7 @@ const Comments = ({ post, currentUserDetails }) => {
                 )}
               </div>
             </div>
-            <LinkifyContent content={body} />
+            <LinkifyContent content={body} linkClass={"text-indigo-700"} />
             <div className="flex py-3">
               <ReplyIcon
                 size={20}
@@ -156,7 +155,10 @@ const Comments = ({ post, currentUserDetails }) => {
                     {convertTimestampToDate(reply.createdAt)}
                   </span>
                 </div>
-                <LinkifyContent content={reply.body} />
+                <LinkifyContent
+                  content={reply.body}
+                  linkClass={"text-indigo-700"}
+                />
               </div>
             ))}
           </div>

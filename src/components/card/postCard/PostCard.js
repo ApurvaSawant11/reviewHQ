@@ -51,7 +51,7 @@ const PostCard = ({ post, currentUserDetails }) => {
       </header>
       <p className="text-xs mt-1 pl-px">{convertTimestampToDate(createdAt)}</p>
       <div className="whitespace-pre-wrap mt-4">
-        <LinkifyContent content={content} />
+        <LinkifyContent content={content} linkClass={"text-indigo-700"} />
         {asset && (
           <div onClick={(e) => e.stopPropagation()}>
             {asset.assetType === "video" ? (

@@ -16,6 +16,7 @@ import {
 } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { ChatUser, ChatMessageForm, ChatMessage } from "components";
+import { toast } from "react-toastify";
 
 const Chats = () => {
   const [users, setUsers] = useState([]);
@@ -86,6 +87,10 @@ const Chats = () => {
         storage,
         `images/${new Date().getTime()} - ${image.name}`
       );
+      toast.info("Upload in progress...", {
+        autoClose: false,
+        position: "top-right",
+      });
       const snap = await uploadBytes(imgRef, image);
       const downloadUrl = await getDownloadURL(ref(storage, snap.ref.fullPath));
       url = downloadUrl;
@@ -114,7 +119,7 @@ const Chats = () => {
 
   return (
     <div className="chatbox-container mt-2">
-      <div>
+      <div className="max-w-xs">
         <h5 className="text-center border-b-2 pb-2">Messages from</h5>
         {users?.map((user) => (
           <ChatUser
