@@ -11,6 +11,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import { ReplyModal } from "components/modal/ReplyModal";
 import { convertTimestampToDate } from "utils/convertDate";
 import { LinkifyContent } from "components/LinkifyContent";
+import { toast } from "react-toastify";
 
 const Comments = ({ post, currentUserDetails }) => {
   const [newComment, setNewComment] = useState("");
@@ -42,19 +43,24 @@ const Comments = ({ post, currentUserDetails }) => {
   }, [post]);
 
   const commentHandler = () => {
-    const commentDetails = {
-      body: newComment,
-      postId: post._id,
-      userName: currentUserDetails.userName,
-      userId: currentUserDetails.uid,
-      createdAt: new Date(),
-      starsEarnedFrom: [],
-      replies: [],
-    };
-    addCommentToPost(post._id, commentDetails);
-    updateCommentCount(post._id);
-    setNewComment("");
-    setShowButton(false);
+    if (newComment.trim() !== "") {
+      const commentDetails = {
+        body: newComment,
+        postId: post._id,
+        userName: currentUserDetails.userName,
+        userId: currentUserDetails.uid,
+        createdAt: new Date(),
+        starsEarnedFrom: [],
+        replies: [],
+      };
+      addCommentToPost(post._id, commentDetails);
+      updateCommentCount(post._id);
+      setNewComment("");
+      setShowButton(false);
+    } else {
+      console.log("gere");
+      toast.error("Comment cannot be empty");
+    }
   };
 
   return (

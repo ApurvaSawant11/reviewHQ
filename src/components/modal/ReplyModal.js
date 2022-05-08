@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import { toast } from "react-toastify";
 import { addCommentReply } from "services/firebase-services";
 
 const ReplyModal = ({ showModal, setShowModal, currentUserDetails }) => {
@@ -16,7 +17,7 @@ const ReplyModal = ({ showModal, setShowModal, currentUserDetails }) => {
       setNewReply("");
       setShowModal({ status: false, commentId: null });
     } else {
-      console.error("Reply field cannot be empty");
+      toast.error("Reply field cannot be empty");
     }
   };
   return (
@@ -40,7 +41,6 @@ const ReplyModal = ({ showModal, setShowModal, currentUserDetails }) => {
           placeholder="Add a reply..."
         />
         <button
-          id="ok-btn"
           className="mt-2 p-1 px-2 bg-primary text-white rounded hover:bg-primaryDark "
           onClick={replyHandler}
         >

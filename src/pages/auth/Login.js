@@ -1,21 +1,30 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "context/auth-context";
+import { toast } from "react-toastify";
 const Login = () => {
-  const { logIn } = useAuth();
+  const { user, logIn } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
+  useEffect(() => {
+    if (user) {
+      setTimeout(() => {
+        navigate(location?.state?.from || "/", { replace: true });
+      }, 1000);
+    }
+  }, [user]);
+
   const loginHandler = async (e) => {
     e.preventDefault();
     try {
       await logIn(formData.email, formData.password);
-      navigate("/", { replace: true });
     } catch (error) {
-      console.error(error);
+      toast.error("Something went wrong");
     }
   };
 
