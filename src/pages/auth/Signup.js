@@ -29,6 +29,7 @@ const Signup = () => {
           userName: userName,
           uid: user.uid,
           starsCount: 0,
+          bookmarkRefs: [],
         };
         createUserDocument(userData);
         navigate("/", { replace: true });

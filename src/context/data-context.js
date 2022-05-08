@@ -1,6 +1,14 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { db } from "config/firebase-config";
-import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  query,
+  orderBy,
+  getDoc,
+  doc,
+  where,
+} from "firebase/firestore";
 import { useAuth } from "./auth-context";
 import { dataReducer, initialReducerData } from "reducer/dataReducer";
 
@@ -11,12 +19,12 @@ const DataContext = createContext({
 
 const DataProvider = ({ children }) => {
   const { currentUserDetails } = useAuth();
-
   const [state, dispatch] = useReducer(dataReducer, initialReducerData);
 
   useEffect(() => {
-    if (currentUserDetails) {
-      onSnapshot(
+    if (currentUserDetails.uid) {
+      // To get the posts ofall the users
+      const unsub = onSnapshot(
         query(collection(db, "posts"), orderBy("createdAt", "desc")),
         (snapshot) => {
           dispatch({
@@ -28,11 +36,38 @@ const DataProvider = ({ children }) => {
           });
         }
       );
+
+      // To get all thebookmarks of the user
+      const unsubscribe = onSnapshot(
+        query(
+          collection(db, "posts"),
+          where(
+            "bookmarkedByUsers",
+            "array-contains",
+            `${currentUserDetails.userName}`
+          )
+        ),
+        (snapshot) => {
+          dispatch({
+            type: "SET_BOOKMARKS",
+            payload: snapshot.docs.map((doc) => ({
+              ...doc.data(),
+              _id: doc.id,
+            })),
+          });
+        }
+      );
+
+      return () => {
+        unsub();
+        unsubscribe();
+      };
     }
   }, [currentUserDetails]);
 
   const value = {
     posts: state.posts,
+    bookmarks: state.bookmarks,
     dispatch,
   };
 

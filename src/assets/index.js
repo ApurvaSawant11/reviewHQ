@@ -5,7 +5,10 @@ export { default as silverMedalImg } from "./second-medal.png";
 export { default as BronzeMedalImg } from "./third-medal.png";
 export {
   AiOutlineHeart as LikeOutlineIcon,
+  AiFillHeart as LikeFillIcon,
   AiFillCloseCircle as CloseIcon,
+  AiFillHome as HomeFillIcon,
+  AiOutlineHome as HomeOutlineIcon,
 } from "react-icons/ai";
 export { FaRegComment as CommentIcon } from "react-icons/fa";
 export {
@@ -17,3 +20,4 @@ export {
   FaBookmark as BookmarkFillIcon,
 } from "react-icons/fa";
 export { BsImage as UploadIcon } from "react-icons/bs";
+export { BiUser as ProfileIcon } from "react-icons/bi";

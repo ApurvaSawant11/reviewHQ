@@ -3,3 +3,4 @@ export { Signup } from "./auth/Signup";
 export { Home } from "./home/Home";
 export { SinglePost } from "./singlePost/SinglePost";
 export { Leaderboard } from "./leaderboard/Leaderboard";
+export { Bookmarks } from "./bookmarks/Bookmarks";
