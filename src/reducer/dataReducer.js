@@ -1,6 +1,7 @@
 const initialReducerData = {
   posts: [],
   bookmarks: [],
+  allUsers: [],
 };
 
 const dataReducer = (state, action) => {
@@ -15,6 +16,12 @@ const dataReducer = (state, action) => {
       return {
         ...state,
         bookmarks: action.payload,
+      };
+
+    case "SET_ALL_USERS":
+      return {
+        ...state,
+        allUsers: action.payload,
       };
     default:
       throw new Error("Error in Data Reducer");

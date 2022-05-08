@@ -2,6 +2,7 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import {
   Bookmarks,
+  Chats,
   Home,
   Leaderboard,
   Login,
@@ -30,7 +31,8 @@ function App() {
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/bookmarks" element={<Bookmarks />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/user/:userId" element={<Profile />} />
+            <Route path="/chats" element={<Chats />} />
           </Route>
         </Routes>
       </div>

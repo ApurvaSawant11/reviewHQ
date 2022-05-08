@@ -58,9 +58,29 @@ const DataProvider = ({ children }) => {
         }
       );
 
+      // To get all the users
+      const usersRef = collection(db, "users");
+      // create query object
+      const q = query(
+        usersRef,
+        where("uid", "not-in", [currentUserDetails.uid])
+      );
+      // execute query
+      const unsubUser = onSnapshot(q, (querySnapshot) => {
+        let users = [];
+        querySnapshot.forEach((doc) => {
+          users.push(doc.data());
+        });
+        dispatch({
+          type: "SET_ALL_USERS",
+          payload: users,
+        });
+      });
+
       return () => {
         unsub();
         unsubscribe();
+        unsubUser();
       };
     }
   }, [currentUserDetails]);
@@ -68,6 +88,7 @@ const DataProvider = ({ children }) => {
   const value = {
     posts: state.posts,
     bookmarks: state.bookmarks,
+    allUsers: state.allUsers,
     dispatch,
   };
 

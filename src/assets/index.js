@@ -23,5 +23,8 @@ export {
   FaBookmark as BookmarkFillIcon,
 } from "react-icons/fa";
 export { BsImage as UploadIcon, BsReply as ReplyIcon } from "react-icons/bs";
-export { BiUser as ProfileIcon } from "react-icons/bi";
-export { ImSearch as SearchIcon } from "react-icons/im";
+export { BiUser as ProfileIcon, BiChat as ChatIcon } from "react-icons/bi";
+export {
+  ImSearch as SearchIcon,
+  ImAttachment as AttachmentIcon,
+} from "react-icons/im";

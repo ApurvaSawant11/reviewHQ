@@ -6,3 +6,6 @@ export { Comments } from "./comments/Comments";
 export { ReplyModal } from "./modal/ReplyModal";
 export { LinkifyContent } from "./LinkifyContent";
 export { RequiresAuth } from "./RequiresAuth";
+export { ChatUser } from "./chat/ChatUser";
+export { ChatMessageForm } from "./chat/ChatMessageForm";
+export { ChatMessage } from "./chat/ChatMessage";
