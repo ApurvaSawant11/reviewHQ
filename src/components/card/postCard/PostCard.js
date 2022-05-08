@@ -1,7 +1,5 @@
 import React from "react";
 import { convertTimestampToDate } from "utils/convertDate";
-import Linkify from "react-linkify";
-import { SecureLink } from "react-secure-link";
 import {
   BookmarkFillIcon,
   BookmarkOutlineIcon,
@@ -17,6 +15,7 @@ import {
   updateArrayOfPost,
   deletePost,
 } from "services/firebase-services";
+import { LinkifyContent } from "components/LinkifyContent";
 
 const PostCard = ({ post, currentUserDetails }) => {
   const navigate = useNavigate();
@@ -52,20 +51,7 @@ const PostCard = ({ post, currentUserDetails }) => {
       </header>
       <p className="text-xs mt-1 pl-px">{convertTimestampToDate(createdAt)}</p>
       <div className="whitespace-pre-wrap mt-4">
-        <Linkify
-          componentDecorator={(decoratedHref, decoratedText, key) => (
-            <SecureLink
-              className="text-indigo-700 "
-              href={decoratedHref}
-              key={key}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {decoratedText}
-            </SecureLink>
-          )}
-        >
-          {content}
-        </Linkify>
+        <LinkifyContent content={content} />
         {asset && (
           <div onClick={(e) => e.stopPropagation()}>
             {asset.assetType === "video" ? (

@@ -35,9 +35,16 @@ const addCommentToPost = async (postId, newComment) => {
 };
 
 // update comment count of a post
-const updateCommentCount = async (postId, currentCommentsCount) => {
+const updateCommentCount = async (postId) => {
   await updateDoc(doc(db, "posts", `${postId}`), {
-    commentsCount: currentCommentsCount + 1,
+    commentsCount: increment(1),
+  });
+};
+
+// add reply to a comment
+const addCommentReply = async (postId, commentId, newReply) => {
+  await updateDoc(doc(db, "posts", `${postId}`, "comments", `${commentId}`), {
+    replies: arrayUnion(newReply),
   });
 };
 
@@ -158,11 +165,13 @@ const updateArrayOfPost = async (
         : arrayRemove(currentUserName),
   });
 };
+
 export {
   createUserDocument,
   addNewPost,
   addCommentToPost,
   updateCommentCount,
+  addCommentReply,
   deletePost,
   uploadAsset,
   deleteAsset,
