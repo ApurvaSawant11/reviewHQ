@@ -9,6 +9,10 @@ header {
 .form-wrapper {
     width: min(90vw, 480px);
 }
+
+.single-post-card {
+    width: min(90vw, 50rem);
+}
   
 .bg-white {
     background-color: #fff;

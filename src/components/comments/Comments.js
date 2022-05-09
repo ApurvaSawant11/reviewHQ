@@ -132,7 +132,9 @@ const Comments = ({ post, currentUserDetails }) => {
                 )}
               </div>
             </div>
-            <LinkifyContent content={body} linkClass={"text-indigo-700"} />
+            <div className="whitespace-pre-wrap">
+              <LinkifyContent content={body} linkClass={"text-indigo-700"} />
+            </div>
             <div className="flex py-3">
               <ReplyIcon
                 size={20}
@@ -155,10 +157,12 @@ const Comments = ({ post, currentUserDetails }) => {
                     {convertTimestampToDate(reply.createdAt)}
                   </span>
                 </div>
-                <LinkifyContent
-                  content={reply.body}
-                  linkClass={"text-indigo-700"}
-                />
+                <div className="whitespace-pre-wrap">
+                  <LinkifyContent
+                    content={reply.body}
+                    linkClass={"text-indigo-700"}
+                  />
+                </div>
               </div>
             ))}
           </div>

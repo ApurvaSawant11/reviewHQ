@@ -32,7 +32,7 @@ const Search = () => {
         className="border-2 border-gray-300 rounded-md bg-slate-200 card-wrapper p-1 pl-2"
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
-        placeholder="Search posts by #hashtags or content"
+        placeholder="Search @username #hashtag or content..."
         onKeyDown={(e) => e.key === "Enter" && setSearchText("")}
       />
       <section>
