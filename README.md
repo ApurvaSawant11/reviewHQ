@@ -16,19 +16,18 @@ reviewHQ provides a platform where you can share your side-projects and get revi
 
 - [Introduction](#introduction)
 - [Features](#features)
-- [Getting Started](#getting-started)
 - [Connect](#connect)
 
-## Introduction
-
 ---
+
+## Introduction
 
 - Not everybody has access to communities or people with expertise who can find your mistakes and give suggestions to make your product/projects better.
   -reviewHQ provides a platform where you can share your side-projects and get reviews and feedback from your peers.
 
-## Features
-
 ---
+
+## Features
 
 **Home**
 
