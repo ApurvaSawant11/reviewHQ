@@ -1,5 +1,6 @@
 import { AttachmentIcon } from "assets";
 import React from "react";
+import { toast } from "react-toastify";
 
 const ChatMessageForm = ({ handleSubmit, text, setText, setImage }) => {
   return (
@@ -11,7 +12,10 @@ const ChatMessageForm = ({ handleSubmit, text, setText, setImage }) => {
         <AttachmentIcon />
       </label>
       <input
-        onChange={(e) => setImage(e.target.files[0])}
+        onChange={(e) => {
+          setImage(e.target.files[0]);
+          toast.success("Image selected...", { position: "top-right" });
+        }}
         type="file"
         id="img"
         className=""

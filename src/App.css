@@ -9,6 +9,10 @@ header {
 .form-wrapper {
     width: min(90vw, 480px);
 }
+
+.single-post-card {
+    width: min(90vw, 50rem);
+}
   
 .bg-white {
     background-color: #fff;
@@ -20,6 +24,10 @@ header {
 
 .bg-gray-200{
     background-color: rgb(133 133 133 / 25%);;
+}
+
+.text-teal {
+    color: #36e536;
 }
 
 .card-wrapper {

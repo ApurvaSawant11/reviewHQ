@@ -1,3 +1,4 @@
+import { LinkifyContent } from "components/LinkifyContent";
 import React, { useRef, useEffect } from "react";
 import { convertTimestampToDate } from "utils/convertDate";
 
@@ -21,6 +22,7 @@ const ChatMessage = ({ msg, user1 }) => {
       >
         {msg.media ? <img src={msg.media} alt={msg.text} /> : null}
         {msg.text}
+        <LinkifyContent content={msg.text} linkClass={"text-teal underline"} />
         <br />
         <small>{convertTimestampToDate(msg.createdAt)}</small>
       </p>

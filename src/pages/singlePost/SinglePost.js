@@ -29,7 +29,7 @@ const SinglePost = () => {
     <article className="text-left flex flex-col items-center">
       {post && (
         <>
-          <section className="card-wrapper post-card rounded-md mt-5 border-2 border-gray-300 p-4 pb-3">
+          <section className="single-post-card rounded-md mt-5 border-2 border-gray-300 p-4 pb-3">
             <header className="flex justify-between">
               <h4 className="font-bold ">@{post.userName}</h4>
               {currentUserDetails?.userName === post.userName && (
@@ -46,7 +46,10 @@ const SinglePost = () => {
               {convertTimestampToDate(post.createdAt)}
             </p>
             <div className="whitespace-pre-wrap mt-4">
-              <LinkifyContent content={post.content} />
+              <LinkifyContent
+                content={post.content}
+                linkClass={"text-indigo-700"}
+              />
               {post.asset && (
                 <div>
                   {post.asset.assetType === "video" ? (
