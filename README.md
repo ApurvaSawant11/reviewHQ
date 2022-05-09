@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+<div align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# reviewHQ
 
-## Available Scripts
+reviewHQ provides a platform where you can share your side-projects and get reviews and feedback from your peers.
 
-In the project directory, you can run:
+![](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-### `npm start`
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Table of Contents
 
-### `npm test`
+- [Introduction](#introduction)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Connect](#connect)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Introduction
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Not everybody has access to communities or people with expertise who can find your mistakes and give suggestions to make your product/projects better.
+  -reviewHQ provides a platform where you can share your side-projects and get reviews and feedback from your peers.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+**Home**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Navigation bar
+- Create new post
+- Posts feed
+- Like, comment and bookmark posts
+- Delete the post if user is the author of the post
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Single Post Page**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Add comments on the Post
+- Add reply to the previous comments present
+- Award a star for the helpful reviews (user cannot give himself/herself a star)
+- Like, Comment and Bookmark option
+- Delete post if user is the author of the post
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Search**
 
-## Learn More
+- User can search any posts by post content
+- To search hashtags - use “#” prefix
+- To search other users - use “@” prefix
+- On clicking search items, navigate to respective pages
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Chats**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Search the user you want to chat with and click on “Message user” to start the conversation
+- User can send messages
+- User can send images
 
-### Code Splitting
+**User Profile**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- See all user details
+- Option to message the user
+- All the posts made by the user
 
-### Analyzing the Bundle Size
+**Bookmarks**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Shows all the posts bookmarked by the user
 
-### Making a Progressive Web App
+**Leaderboard**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Show leaderboard of all the user of reviewHQ
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Connect
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<a href="https://twitter.com/ApurvaSawant11"><img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white"/></a>
+<a href="https://www.linkedin.com/in/apurvasawant11/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
